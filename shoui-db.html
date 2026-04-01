@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>奇門遁甲 象意データベース｜天干・門・神の組み合わせ別解説 | KIYOMITSU</title>
+  <meta name="description" content="奇門遁甲の天干・門・神の組み合わせ別に象意（解釈）を検索できるデータベース。甲乙丙丁戊己庚辛壬癸×八門×八神の格局・吉凶・象意を網羅。佐藤六龍氏の研究をもとに整形。">
+  <meta property="og:title" content="奇門遁甲 象意データベース | KIYOMITSU">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://kiyomitsu.jp/shoui-db">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .db-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+      align-items: end;
+    }
+    .db-controls label { font-size: .78rem; color: var(--text-3); display: block; margin-bottom: 4px; }
+    .db-controls input, .db-controls select {
+      width: 100%; padding: .55rem .8rem;
+      border: 1px solid var(--border); border-radius: 3px;
+      font-size: .85rem; font-family: var(--font-body);
+      background: var(--surface); color: var(--text);
+      transition: border-color .2s;
+    }
+    .db-controls input:focus, .db-controls select:focus { outline: none; border-color: var(--gold-light); }
+    .db-reset {
+      padding: .55rem 1rem; background: transparent; border: 1px solid var(--border);
+      border-radius: 3px; font-size: .82rem; cursor: pointer;
+      color: var(--text-2); white-space: nowrap; font-family: var(--font-body);
+      transition: .2s;
+    }
+    .db-reset:hover { border-color: var(--gold); color: var(--gold); }
+    .db-stats {
+      font-size: .78rem; color: var(--text-3); margin-bottom: 1rem;
+      padding: .5rem .75rem; background: var(--bg-warm);
+      border-radius: 3px; border-left: 2px solid var(--gold);
+    }
+    .db-table-wrap { overflow-x: auto; }
+    .db-table {
+      width: 100%; border-collapse: collapse; font-size: .84rem;
+    }
+    .db-table thead tr { background: var(--bg-warm); }
+    .db-table th {
+      padding: .65rem .85rem; text-align: left;
+      font-family: var(--font-jp); font-weight: 600; font-size: .8rem;
+      border-bottom: 2px solid var(--gold); white-space: nowrap;
+      color: var(--text);
+    }
+    .db-table td {
+      padding: .65rem .85rem; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: top; line-height: 1.7;
+    }
+    .db-table tr:last-child td { border-bottom: none; }
+    .db-table tr:hover td { background: var(--bg-warm); }
+    .db-table .no { width: 3rem; color: var(--text-3); font-size: .75rem; white-space: nowrap; }
+    .db-table .midashi { min-width: 160px; font-weight: 500; color: var(--text); font-family: var(--font-jp); }
+    .db-table .kakkyoku { min-width: 100px; font-size: .78rem; }
+    .db-table .shoui { min-width: 280px; font-size: .82rem; }
+    .badge-kk { display: inline-block; font-size: .7rem; padding: 1px 7px; border-radius: 10px; white-space: nowrap; }
+    .kk-kichi { background: #E1F5EE; color: #085041; }
+    .kk-kyou { background: #FCEBEB; color: #791F1F; }
+    .kk-mixed { background: #FAEEDA; color: #633806; }
+    .shoui-text { font-size: .82rem; color: var(--text-2); }
+    .no-results { text-align: center; padding: 3rem 1rem; color: var(--text-3); font-size: .9rem; }
+    @media (max-width: 680px) {
+      .db-controls { grid-template-columns: 1fr 1fr; }
+      .db-controls .search-col { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="brand">Kiyomitsu</span>
+      <span class="tagline">奇門遁甲の研究と実践</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="kimon-theory.html">奇門遁甲とは</a></li>
+      <li><a href="trust.html">安全性</a></li>
+      <li><a href="shoui-db.html" class="active">象意DB</a></li>
+      <li><a href="service.html">サービス</a></li>
+      <li><a href="profile.html">プロフィール</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html" class="cta-link">お問い合わせ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <div class="breadcrumb"><a href="index.html">ホーム</a><span>象意データベース</span></div>
+      <span class="tag tag-gold" style="margin-bottom:1rem;display:inline-block;">象意辞典</span>
+      <h1>奇門遁甲 象意データベース</h1>
+      <p class="lead">天干・門・神の組み合わせ別に象意（格局解釈）を検索できます。佐藤六龍氏の研究をもとに整形した資料です。キーワード・天干・門・吉凶でフィルタリングできます。</p>
+    </div>
+
+    <div class="article-body" style="padding-top:1.5rem;">
+      <div class="db-controls">
+        <div class="search-col">
+          <label for="searchBox">キーワード検索（見出し・格局・象意）</label>
+          <input type="text" id="searchBox" placeholder="例：甲乙、生門、財源、夫婦..." oninput="filterDB()">
+        </div>
+        <div>
+          <label for="filterKan">天干1</label>
+          <select id="filterKan" onchange="filterDB()">
+            <option value="">すべて</option>
+            <option>甲</option><option>乙</option><option>丙</option>
+            <option>丁</option><option>戊</option><option>己</option>
+            <option>庚</option><option>辛</option><option>壬</option><option>癸</option>
+          </select>
+        </div>
+        <div>
+          <label for="filterMon">門</label>
+          <select id="filterMon" onchange="filterDB()">
+            <option value="">すべて</option>
+            <option>開門</option><option>休門</option><option>生門</option>
+            <option>傷門</option><option>杜門</option><option>景門</option>
+            <option>死門</option><option>驚門</option>
+            <option>四吉門</option><option>四凶門</option><option>五凶門</option><option>吉凶門</option>
+          </select>
+        </div>
+        <div>
+          <label for="filterKikyo">吉凶</label>
+          <select id="filterKikyo" onchange="filterDB()">
+            <option value="">すべて</option>
+            <option>吉</option><option>凶</option><option>吉凶混</option>
+          </select>
+        </div>
+        <button class="db-reset" onclick="resetFilters()">リセット</button>
+      </div>
+
+      <div class="db-stats" id="dbStats">全 99 件を表示中</div>
+
+      <div class="db-table-wrap">
+        <table class="db-table" id="dbTable">
+          <thead>
+            <tr>
+              <th class="no">No.</th>
+              <th class="midashi">見出し</th>
+              <th>格局</th>
+              <th>天干</th>
+              <th>門</th>
+              <th>神</th>
+              <th>吉凶</th>
+              <th class="shoui">象意</th>
+            </tr>
+          </thead>
+          <tbody id="dbBody"></tbody>
+        </table>
+        <div class="no-results" id="noResults" style="display:none;">
+          条件に一致するデータが見つかりませんでした。
+        </div>
+      </div>
+
+      <div class="cta-block" style="margin-top:3rem;">
+        <h3>この象意を自分の状況に当てはめたい方へ</h3>
+        <p>時盤の読み方や、今の状況に合った象意の解釈は、鑑定セッションで丁寧にお伝えします。</p>
+        <div class="btn-group">
+          <a href="https://coconala.com/services/3803253" target="_blank" rel="noopener" class="btn btn-primary">奇門遁甲鑑定を予約する →</a>
+          <a href="kimon-theory.html" class="btn btn-secondary">奇門遁甲の基礎を学ぶ</a>
+        </div>
+      </div>
+
+      <div class="ornament">✦ ✦ ✦</div>
+      <p style="font-size:.8rem;color:var(--text-3);margin-top:1rem;">参考文献：佐藤六龍氏の研究成果をもとに整形・掲載。関連ページ：<a href="kimon-theory.html" style="color:var(--gold);">奇門遁甲とは</a> ／ <a href="compare.html" style="color:var(--gold);">占術の比較</a></p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><span class="brand">Kiyomitsu</span><p>奇門遁甲の研究と実践。</p></div>
+      <div class="footer-links">
+        <div class="footer-links-group"><h4>Learn</h4><ul><li><a href="kimon-theory.html">奇門遁甲とは</a></li><li><a href="trust.html">安全性</a></li><li><a href="shoui-db.html">象意DB</a></li><li><a href="compare.html">占術の比較</a></li></ul></div>
+        <div class="footer-links-group"><h4>Service</h4><ul><li><a href="service.html">サービス</a></li><li><a href="profile.html">プロフィール</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">お問い合わせ</a></li></ul></div>
+        <div class="footer-links-group"><h4>Legal</h4><ul><li><a href="privacy.html">プライバシーポリシー</a></li><li><a href="legal.html">特定商取引法</a></li></ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Kiyomitsu Studio</span><div class="footer-social"><a href="https://note.com/kiyomitsu369" target="_blank" rel="noopener">note</a><a href="https://x.com/kiyomitsu369" target="_blank" rel="noopener">X</a><a href="https://coconala.com/users/109941" target="_blank" rel="noopener">coconala</a></div></div>
+  </div>
+</footer>
+
+<script>
+const DATA = [
+  {no:1,midashi:"甲甲　吉凶門　直符",kakkyoku:"なし",kan1:"甲",kan2:"甲",mon:"吉凶門",shin:"直符",monClass:"吉凶門",shinClass:"直符",kikyo:"吉凶混",shoui:"①目上との関係がよくなり、引き立てが大きい。②人びとから慕われ、四方八方からの助力がある。③地位や身分がとんとん拍子で上昇する。④就職がまとまる。⑤折目ただしくなって信用される。⑥品位が備わって人びとから尊敬され、衆望を一身に集める。"},
+  {no:2,midashi:"甲乙　吉凶門　直符",kakkyoku:"なし",kan1:"甲",kan2:"乙",mon:"吉凶門",shin:"直符",monClass:"吉凶門",shinClass:"直符",kikyo:"吉凶混",shoui:"①目上の引きたてが大きい。②いい後盾ができる。"},
+  {no:3,midashi:"甲丙　吉凶門　直符",kakkyoku:"青竜返首",kan1:"甲",kan2:"丙",mon:"吉凶門",shin:"直符",monClass:"吉凶門",shinClass:"直符",kikyo:"吉凶混",shoui:"①目上からの引き立てが大きい。②地位または身分がいちじるしく上昇する。③昇進のよろこびがある。④上流社会へ参加することができる。"},
+  {no:4,midashi:"甲丁　吉凶門　直符",kakkyoku:"なし",kan1:"甲",kan2:"丁",mon:"吉凶門",shin:"直符",monClass:"吉凶門",shinClass:"直符",kikyo:"吉凶混",shoui:"①目上からの引き立てによって名声があがる。②目上からの引き立てによって思う存分才能が発揮できる。"},
+  {no:5,midashi:"甲戊　四吉門　直符",kakkyoku:"なし",kan1:"甲",kan2:"戊",mon:"四吉門",shin:"直符",monClass:"吉門",shinClass:"直符",kikyo:"吉",shoui:"①目上からの引き立てによって今までの交際がだんだん必要でなくなる。②目上からの引き立てによって交際範囲が変わる。"},
+  {no:6,midashi:"甲戊　四凶門　直符",kakkyoku:"なし",kan1:"甲",kan2:"戊",mon:"四凶門",shin:"直符",monClass:"凶門",shinClass:"直符",kikyo:"吉凶混",shoui:"①目上からの引き立ては今までの交際関係をわるくする。②目上からの引き立てがかえって円味を失わせる。③多勢に無勢で負ける。④孤立無援・孤軍奮闘する。"},
+  {no:7,midashi:"甲己　吉凶門　直符",kakkyoku:"なし",kan1:"甲",kan2:"己",mon:"吉凶門",shin:"直符",monClass:"吉凶門",shinClass:"直符",kikyo:"吉凶混",shoui:"①目上の引き立てによって異性関係がよくなる。②目上の引き立てによって良縁にめぐまれる。③目上によって美術・芸術・芸能などの方面で大きなメリットがある。④うまく目上と共通利益をもち、どんどん発展する。"},
+  {no:8,midashi:"甲庚　吉凶門　直符",kakkyoku:"飛宮格",kan1:"甲",kan2:"庚",mon:"吉凶門",shin:"直符",monClass:"吉凶門",shinClass:"直符",kikyo:"吉凶混",shoui:"①主人の死。②高い地位からの転落。③目上との関係がわるくなる。"},
+  {no:9,midashi:"甲辛　四吉門　直符",kakkyoku:"なし",kan1:"甲",kan2:"辛",mon:"四吉門",shin:"直符",monClass:"吉門",shinClass:"直符",kikyo:"吉",shoui:"①目上からの引き立てによって今までの信仰がだんだん必要でなくなる。②目上によって信仰が変わる。"},
+  {no:10,midashi:"甲辛　四凶門　直符",kakkyoku:"なし",kan1:"甲",kan2:"辛",mon:"四凶門",shin:"直符",monClass:"凶門",shinClass:"直符",kikyo:"吉凶混",shoui:"①目上からいじめられる。②目上が信仰を干渉する。③外地でトラブルが多い。"},
+  {no:11,midashi:"甲壬　四吉門　直符",kakkyoku:"なし",kan1:"甲",kan2:"壬",mon:"四吉門",shin:"直符",monClass:"吉門",shinClass:"直符",kikyo:"吉",shoui:"①目上をうまく利用して成功する。②目上を踏み石にして発展する。"},
+  {no:12,midashi:"甲壬　四凶門　直符",kakkyoku:"なし",kan1:"甲",kan2:"壬",mon:"四凶門",shin:"直符",monClass:"凶門",shinClass:"直符",kikyo:"吉凶混",shoui:"①なにごとにおいても目上の人にたてつく。②目上との関係が非常にわるくなる。③行ったきり帰らない。④流浪する。"},
+  {no:13,midashi:"甲癸　吉凶門　直符",kakkyoku:"なし",kan1:"甲",kan2:"癸",mon:"吉凶門",shin:"直符",monClass:"吉凶門",shinClass:"直符",kikyo:"吉凶混",shoui:"①目上の人にたいへん忠実で、よく尽くすので関係がよくなる。②目上との関係のよさによって万事うまくいく。"},
+  {no:14,midashi:"乙甲　休門　吉凶神",kakkyoku:"乾位:竜遁、艮位:虎遁",kan1:"乙",kan2:"甲",mon:"休門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①異性との関係が非常にうまくいくため成功する。②家庭生活がとてもよく、夫婦仲も非常によい。③女性はとても女らしくなる。④異性からの力が非常に大きい。"},
+  {no:15,midashi:"乙甲　生門　吉凶神",kakkyoku:"巽位:風遁",kan1:"乙",kan2:"甲",mon:"生門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①夫婦仲または異性との関係が非常によくなる。②家庭生活がとても幸福になる。③男性が女性に対して非常にやさしくなる。④異性の助力によって地位や身分が上昇する。"},
+  {no:16,midashi:"乙甲　開門　吉凶神",kakkyoku:"坤位:雲遁",kan1:"乙",kan2:"甲",mon:"開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①男女関係が順調。②家庭円満。③異性からの助力が大きい。"},
+  {no:17,midashi:"乙甲　五凶門　四吉神",kakkyoku:"なし",kan1:"乙",kan2:"甲",mon:"五凶門",shin:"四吉神",monClass:"凶門",shinClass:"吉神",kikyo:"吉凶混",shoui:"①目上がたよりになって安定する。②男性は女性に対してよく尽くし、折目ただしくなる。"},
+  {no:18,midashi:"乙甲　五凶門　三凶神",kakkyoku:"なし",kan1:"乙",kan2:"甲",mon:"五凶門",shin:"三凶神",monClass:"凶門",shinClass:"凶神",kikyo:"凶",shoui:"①甘ったれて目上にばかり頼るため、万事うまくいかない。②夫婦関係または男女関係がうまくいかない。③異性や配偶者の獲得について、得やすいが保ちがたい。④異性や配偶者のあいだで背信行為がある。⑤女性が男を邪険にあつかう。⑥男性が女性からいじめられる。"},
+  {no:19,midashi:"乙乙　休門　四吉神",kakkyoku:"乙奇伏吟（乾位:竜遁、艮位:虎遁）",kan1:"乙",kan2:"乙",mon:"休門",shin:"四吉神",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"竜遁・虎遁: ①異性との関係が非常にうまくいくため成功する。②家庭生活がとてもよく、夫婦仲も非常によい。③女性はとても女らしくなる。④異性からの力が非常に大きい。伏吟でも家庭生活が順調であり、夫婦仲がよい。"},
+  {no:20,midashi:"乙乙　休門　三凶神",kakkyoku:"乙奇伏吟（乾位:竜遁、艮位:虎遁）",kan1:"乙",kan2:"乙",mon:"休門",shin:"三凶神",monClass:"吉門",shinClass:"凶神",kikyo:"吉凶混",shoui:"竜遁・虎遁: ①異性関係が成功につながる②夫婦仲がよい。伏吟の場合は家庭トラブルが多く、騰蛇なら足の引っ張り合い、勾陳なら詐欺、朱雀なら秘密が露見する。"},
+  {no:21,midashi:"乙乙　生門　四吉神",kakkyoku:"乙奇伏吟（巽位:風遁）",kan1:"乙",kan2:"乙",mon:"生門",shin:"四吉神",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"風遁: ①夫婦仲・異性との関係が非常によくなる。②家庭生活がとても幸福になる。③男性が女性に対して非常にやさしくなる。④異性の助力によって地位・身分が上昇する。伏吟でも家庭生活が順調。"},
+  {no:22,midashi:"乙乙　生門　三凶神",kakkyoku:"乙奇伏吟（巽位:風遁）",kan1:"乙",kan2:"乙",mon:"生門",shin:"三凶神",monClass:"吉門",shinClass:"凶神",kikyo:"吉凶混",shoui:"風遁: ①夫婦仲・異性との関係が非常によくなる。②家庭生活がとても幸福になる。伏吟の場合は家庭不和・トラブルが多い。"},
+  {no:23,midashi:"乙乙　開門　四吉神",kakkyoku:"乙奇伏吟（坤位:雲遁）",kan1:"乙",kan2:"乙",mon:"開門",shin:"四吉神",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"雲遁: ①男女関係が順調。②家庭円満。③異性からの助力が大きい。伏吟でも家庭生活が順調であり、夫婦仲がよい。"},
+  {no:24,midashi:"乙乙　開門　三凶神",kakkyoku:"乙奇伏吟（坤位:雲遁）",kan1:"乙",kan2:"乙",mon:"開門",shin:"三凶神",monClass:"吉門",shinClass:"凶神",kikyo:"吉凶混",shoui:"雲遁: ①男女関係が順調。②家庭円満。伏吟の場合は家庭不和・トラブルが多い。"},
+  {no:25,midashi:"乙乙　五凶門　吉凶神",kakkyoku:"乙奇伏吟",kan1:"乙",kan2:"乙",mon:"五凶門",shin:"吉凶神",monClass:"凶門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①傷門：乱雑さが事故や災難をひきおこす。②杜門：乱雑なため八方ふさがりになる。③景門：乱雑なために外面はよく見えるが内実がともなわず浪費だけ。④死門：乱雑なため一切がだめになる。⑤驚門：乱雑なために不安がつきまとう。"},
+  {no:26,midashi:"乙丙　休門　四吉神",kakkyoku:"乾位:竜遁、艮位:虎遁",kan1:"乙",kan2:"丙",mon:"休門",shin:"四吉神",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"①太陰：安定することによって精神的やすらぎ。②六合：安定により人和がたもたれ交際関係がよくなる。③九地：安定により地位が上昇する。④九天：安定により身分が上昇する。乙奇による安定は結婚による安定もふくむ。"},
+  {no:27,midashi:"乙丙　休門　三凶神",kakkyoku:"乾位:竜遁、艮位:虎遁",kan1:"乙",kan2:"丙",mon:"休門",shin:"三凶神",monClass:"吉門",shinClass:"凶神",kikyo:"吉凶混",shoui:"竜遁・虎遁: ①異性関係が成功につながる②夫婦仲がよい。竜遁・虎遁にならない場合は縁談にめぐまれず、結婚した人は別れる危険が大きい。"},
+  {no:28,midashi:"乙丙　生門　四吉神",kakkyoku:"巽位:風遁",kan1:"乙",kan2:"丙",mon:"生門",shin:"四吉神",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"風遁: ①夫婦仲・異性との関係が非常によくなる。②家庭生活がとても幸福になる。風遁でない場合でも安定ゆえに成長・発展・地位昇進のよろこびがある。"},
+  {no:29,midashi:"乙丙　生門　三凶神",kakkyoku:"巽位:風遁",kan1:"乙",kan2:"丙",mon:"生門",shin:"三凶神",monClass:"吉門",shinClass:"凶神",kikyo:"吉凶混",shoui:"風遁: ①夫婦仲・異性との関係が非常によくなる。風遁でなければ凶神により騰蛇なら濡衣をきせられるトラブル、勾陳なら詐欺に逢う。"},
+  {no:30,midashi:"乙丙　五凶門　吉凶神",kakkyoku:"なし",kan1:"乙",kan2:"丙",mon:"五凶門",shin:"吉凶神",monClass:"凶門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①傷門：けが・事故・夫婦わかれ。②杜門：だまし合って夫婦わかれ。③景門：表面ばかり飾り派手すぎて浪費・夫婦わかれ。④死門：夫婦の間で生別・死別。⑤驚門：夫婦の間で誤解が生じて別れる。"},
+  {no:31,midashi:"乙丁　休門　吉凶神",kakkyoku:"乾位:竜遁、艮位:虎遁",kan1:"乙",kan2:"丁",mon:"休門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"竜遁・虎遁: ①異性関係が成功につながる②夫婦仲がよい。それ以外でも: ①家庭の安定と幸福。②文書とかかわることで万事うまく運ぶ。"},
+  {no:32,midashi:"乙丁　生門　吉凶神",kakkyoku:"巽位:風遁",kan1:"乙",kan2:"丁",mon:"生門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"風遁: ①夫婦仲・男女仲がよくなる。②家庭生活がよく安定して非常にしあわせになる。それ以外でも: ①家庭の安定と幸福。②安定さが名声を高める。③文書や学問でいいことが続く。④着実に成功し発展する。"},
+  {no:33,midashi:"乙丁　開門　吉凶神",kakkyoku:"坤位:雲遁",kan1:"乙",kan2:"丁",mon:"開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"雲遁: ①男女関係・夫婦関係が順調。②家庭円満。③異性からの助力が大きい。それ以外でも: ①家庭の安定と幸福。②文書のことでいいことがある。"},
+  {no:34,midashi:"乙丁　五凶門　四吉神",kakkyoku:"なし",kan1:"乙",kan2:"丁",mon:"五凶門",shin:"四吉神",monClass:"凶門",shinClass:"吉神",kikyo:"吉凶混",shoui:"①文書のことでいいことがある。②安定して順調。"},
+  {no:35,midashi:"乙丁　五凶門　三凶神",kakkyoku:"なし",kan1:"乙",kan2:"丁",mon:"五凶門",shin:"三凶神",monClass:"凶門",shinClass:"凶神",kikyo:"凶",shoui:"①杜門：騙されて損失が非常に大きい。②景門：派手すぎて浪費がやめられない。③死門：万事ストップして前へすすめない。④驚門：意外なことが次つぎ発生して困惑する。⑤傷門：事故やけががある。"},
+  {no:36,midashi:"乙戊　休門　吉凶神",kakkyoku:"乾位:竜遁、艮位:虎遁",kan1:"乙",kan2:"戊",mon:"休門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"竜遁・虎遁: ①異性関係が成功につながる②夫婦仲がよい。それ以外でも: ①家庭の安定と幸福。②いい縁談にめぐまれる。③旅行がとても楽しい。"},
+  {no:37,midashi:"乙戊　生門　吉凶神",kakkyoku:"巽位:風遁",kan1:"乙",kan2:"戊",mon:"生門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"風遁: ①夫婦仲・男女仲がよくなる。②家庭生活がよく安定。それ以外でも: ①家庭の安泰。②いい縁談にめぐまれる。③とても楽しい旅行をする。"},
+  {no:38,midashi:"乙戊　開門　吉凶神",kakkyoku:"坤位:雲遁",kan1:"乙",kan2:"戊",mon:"開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"雲遁: ①男女仲・夫婦仲がとても円満。②家庭生活がとても幸福。③異性からの助力が大きい。それ以外でも: ①家庭の安泰。②旅行でいいことがある。③良縁がある。"},
+  {no:39,midashi:"乙戊　五凶門　四吉神",kakkyoku:"なし",kan1:"乙",kan2:"戊",mon:"五凶門",shin:"四吉神",monClass:"凶門",shinClass:"吉神",kikyo:"吉凶混",shoui:"①旅行でいいことがある。②安定して順調。③良縁にめぐまれる。"},
+  {no:40,midashi:"乙戊　五凶門　三凶神",kakkyoku:"なし",kan1:"乙",kan2:"戊",mon:"五凶門",shin:"三凶神",monClass:"凶門",shinClass:"凶神",kikyo:"凶",shoui:"①杜門：行き先がふさがって立ちどまる。②景門：外見ばかりで内実がともなわない。③死門：万事ストップして前へすすめない。④驚門：意外なことが次つぎ発生して少し手間どる。⑤傷門：大きな障害にぶつかる。"},
+  {no:41,midashi:"乙己　休門　吉凶神",kakkyoku:"日奇得使（乾位:竜遁、艮位:虎遁）",kan1:"乙",kan2:"己",mon:"休門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①少なきを以って多きに勝つ。②柔を以て剛を制する。③基礎がしっかりしているため非常に安定する。④男女仲または夫婦仲がうまくいく。"},
+  {no:42,midashi:"乙己　生門　吉凶神",kakkyoku:"日奇得使（巽位:風遁）",kan1:"乙",kan2:"己",mon:"生門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①少なきを以て多きに勝つ。②柔を以て剛を制する。③基礎がしっかりしているから大いに生長する。④男女の仲がいい方向にむかって進む。⑤家庭に幸福がくる。"},
+  {no:43,midashi:"乙己　開門　吉凶神",kakkyoku:"地遁（坤位:雲遁）",kan1:"乙",kan2:"己",mon:"開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①少なきを以て多きに勝つ。②柔を以て剛を制する。③基礎がしっかりしているから大いに発展する。④いい異性関係にめぐまれる。⑤家庭安泰。"},
+  {no:44,midashi:"乙己　五凶門　吉凶神",kakkyoku:"日奇得使",kan1:"乙",kan2:"己",mon:"五凶門",shin:"吉凶神",monClass:"凶門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①少なきを以て多きに勝つ。②柔をもって剛を制する。③安定して幸福になる。"},
+  {no:45,midashi:"乙庚　休門　四吉神",kakkyoku:"乾位:竜遁、艮位:虎遁",kan1:"乙",kan2:"庚",mon:"休門",shin:"四吉神",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"竜遁・虎遁: ①異性関係が成功につながる②夫婦仲がよい。それ以外でも: やすらぎが得られる。"},
+  {no:46,midashi:"乙庚　休門　三凶神",kakkyoku:"乾位:竜遁、艮位:虎遁",kan1:"乙",kan2:"庚",mon:"休門",shin:"三凶神",monClass:"吉門",shinClass:"凶神",kikyo:"吉凶混",shoui:"竜遁・虎遁: ①異性関係が成功につながる②夫婦仲がよい。それ以外: やすらぎが得られず、財産あらそいがあり、夫婦の心はたがいに別々になる。"},
+  {no:47,midashi:"乙庚　生門　四吉神",kakkyoku:"巽位:風遁",kan1:"乙",kan2:"庚",mon:"生門",shin:"四吉神",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"風遁: ①夫婦仲・異性との関係が非常によくなる。②家庭生活がとても幸福になる。風遁でなければ、順調に成長するだけになる。"},
+  {no:48,midashi:"乙庚　生門　三凶神",kakkyoku:"巽位:風遁",kan1:"乙",kan2:"庚",mon:"生門",shin:"三凶神",monClass:"吉門",shinClass:"凶神",kikyo:"吉凶混",shoui:"風遁: ①夫婦仲・異性との関係が非常によくなる。②家庭生活がとても幸福になる。風遁でなければ、財産あらそいがあり、夫婦はたがいに嫌いあう。"},
+  {no:49,midashi:"乙庚　開門　四吉神",kakkyoku:"坤位:雲遁",kan1:"乙",kan2:"庚",mon:"開門",shin:"四吉神",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"雲遁: ①男女関係が順調。②家庭円満。③異性からの助力が大きい。雲遁でなければ、順調に発展するだけになる。"},
+  {no:50,midashi:"乙庚　開門　三凶神",kakkyoku:"坤位:雲遁",kan1:"乙",kan2:"庚",mon:"開門",shin:"三凶神",monClass:"吉門",shinClass:"凶神",kikyo:"吉凶混",shoui:"雲遁: ①男女関係が順調。②家庭円満。③異性からの助力が大きい。雲遁でなければ、財産あらそいがあり、夫婦はたがいに嫌いあう。"},
+  {no:51,midashi:"乙庚　五凶門　吉凶神",kakkyoku:"なし",kan1:"乙",kan2:"庚",mon:"五凶門",shin:"吉凶神",monClass:"凶門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①財産あらそいがある。②夫婦の心がたがいに別々になる。凶門別: 傷門なら事故・刃傷ざた、杜門なら詐欺、景門なら秘密が露見、死門なら死亡、驚門なら意外な事件。"},
+  {no:52,midashi:"乙辛　休門　吉凶神",kakkyoku:"青竜逃走（乾位:竜遁、艮位:虎遁）",kan1:"乙",kan2:"辛",mon:"休門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"竜遁・虎遁: ①異性関係が成功につながる②夫婦仲がよい。青竜逃走の場合: 目上に見はなされ、金もうけのチャンスを失い、目下に裏切られる。"},
+  {no:53,midashi:"乙辛　生門　吉凶神",kakkyoku:"青竜逃走（巽位:風遁）",kan1:"乙",kan2:"辛",mon:"生門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"風遁: ①夫婦仲・異性との関係が非常に良くなる。②家庭生活がとても幸福になる。青竜逃走の場合: 目上に見はなされ、金もうけのチャンスを失い、目下に裏切られる。"},
+  {no:54,midashi:"乙辛　開門　吉凶神",kakkyoku:"青竜逃走（坤位:雲遁）",kan1:"乙",kan2:"辛",mon:"開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"雲遁: ①男女関係が順調。②家庭円満。③異性からの助力が大きい。青竜逃走の場合: 目上に見はなされ、金もうけのチャンスを失い、目下に裏切られる。"},
+  {no:55,midashi:"乙辛　五凶門　吉凶神",kakkyoku:"青竜逃走",kan1:"乙",kan2:"辛",mon:"五凶門",shin:"吉凶神",monClass:"凶門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①目上に見はなされ、金もうけのチャンスを失い、目下に裏切られる。凶門別: 傷門なら事故・障害・あらそい、杜門なら詐欺・進路ふさがれる、景門なら秘密がばれる、死門なら停滞、驚門なら突発事件・不安。"},
+  {no:56,midashi:"乙壬　休門　吉凶神",kakkyoku:"乾位:竜遁、艮位:虎遁",kan1:"乙",kan2:"壬",mon:"休門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①男性は旅行運にめぐまれる。②女性は結婚運にめぐまれ、玉のこしに乗る。③安定して充実した家庭生活をすごすことができる。④自由で気ままで幸福。"},
+  {no:57,midashi:"乙壬　生門　吉凶神",kakkyoku:"巽位:風遁",kan1:"乙",kan2:"壬",mon:"生門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①男性は旅行運にめぐまれる。②女性は結婚運にめぐまれ、玉のこしに乗る。③自由さや柔軟さによって成長し、成功する。"},
+  {no:58,midashi:"乙壬　開門　吉凶神",kakkyoku:"坤位:雲遁",kan1:"乙",kan2:"壬",mon:"開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①男性は旅行運にめぐまれる。②女性は結婚運にめぐまれ、玉のこしに乗る。③自由さや柔軟さによって発展し、安定する。"},
+  {no:59,midashi:"乙壬　五凶門　四吉神",kakkyoku:"なし",kan1:"乙",kan2:"壬",mon:"五凡門",shin:"四吉神",monClass:"凶門",shinClass:"吉神",kikyo:"吉凶混",shoui:"①男性は旅行運にめぐまれる。②女性は結婚運にめぐまれ、玉のこしに乗る。太陰なら心にゆとりの落ちついた日常生活、六合なら交際が順調、九地なら地位が安定、九天なら身分が安定。"},
+  {no:60,midashi:"乙壬　五凶門　三凶神",kakkyoku:"なし",kan1:"乙",kan2:"壬",mon:"五凶門",shin:"三凶神",monClass:"凶門",shinClass:"凶神",kikyo:"凶",shoui:"傷門+騰蛇: トラブルによる事故・けが。杜門+勾陳: 騙されて八方ふさがり。景門+勾陳: 騙されて知られたくないことがばれる。死門+勾陳: 騙されて一切がだめになる。朱雀系: 法律にひっかかって各種被害。"},
+  {no:61,midashi:"乙癸　休門　吉凶神",kakkyoku:"乾位:竜遁、艮位:虎遁",kan1:"乙",kan2:"癸",mon:"休門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①こころの安らぎを得る。②静けさの中に幸せと楽しさがある。③家庭内に浪風がなく、夫婦仲や男女仲が非常に安定する。"},
+  {no:62,midashi:"乙癸　生門　吉凶神",kakkyoku:"巽位:風遁",kan1:"乙",kan2:"癸",mon:"生門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①こころが安まり、静けさの中に落ちつく。②家庭・夫婦が安定し、一般的な男女仲もよくなる。③着実に成長し、地位がだんだん向上する。"},
+  {no:63,midashi:"乙癸　開門　吉凶神",kakkyoku:"坤位:雲遁",kan1:"乙",kan2:"癸",mon:"開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①こころが安まり、静けさの中に落ちつく。②家庭・夫婦が安定し、一般的な異性関係もよくなる。③着実に発展し、身分がだんだん上昇する。"},
+  {no:64,midashi:"乙癸　五凶門　四吉神",kakkyoku:"なし",kan1:"乙",kan2:"癸",mon:"五凶門",shin:"四吉神",monClass:"凶門",shinClass:"吉神",kikyo:"吉凶混",shoui:"①太陰：静けさの中にこころの安らぎがあり派手さはないがよろこびと幸せがある。②六合：人和にあふれ友だち・異性・夫婦・親子などがすべてうまくいく。③九地：地利に恵まれ地位が安定。④九天：天時に恵まれ身分が向上。"},
+  {no:65,midashi:"乙癸　五凶門　三凶神",kakkyoku:"なし",kan1:"乙",kan2:"癸",mon:"五凶門",shin:"三凶神",monClass:"凶門",shinClass:"凶神",kikyo:"凶",shoui:"傷門+騰蛇: トラブルによって傷つき姿をかくすことを余儀なくさせられる。杜門+騰蛇: トラブルによって道がとざされる。朱雀系: 刑にふれる・裁判が負けてばかり・裁判がいつまでも続く・試験に失敗・落ちついて勉強ができない。"},
+  {no:66,midashi:"丙甲　休・開・五凶門　吉凶神",kakkyoku:"飛鳥跌穴",kan1:"丙",kan2:"甲",mon:"休・開・五凶門",shin:"吉凶神",monClass:"吉凶門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①たなぼた式にいきなり大金がはいって来る。②成り行きをみる目がはっきりして正確であり、万事について先見の明をもつようになる。③ものごとの対処の仕方が非常に上手になり、どんなにむずかしい事でも難なく解決できるようになる。④労せずに得ることができる。"},
+  {no:67,midashi:"丙甲　生門　九天",kakkyoku:"神遁",kan1:"丙",kan2:"甲",mon:"生門",shin:"九天",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"①ラッキー・チャンスによって大きな財源を手にする。②持続的に金がつぎつぎと入ってくる。"},
+  {no:68,midashi:"丙甲　生門　蛇・陰・合・陳・雀・地",kakkyoku:"飛鳥跌穴",kan1:"丙",kan2:"甲",mon:"生門",shin:"蛇・陰・合・陳・雀・地",monClass:"吉門",shinClass:"混合",kikyo:"吉凶混",shoui:"①たなぼた式にいきなり大金がはいって来る。②成り行きをみる目がはっきりして正確。③ものごとの対処の仕方が非常に上手になり、どんなむずかしい事でも難なく解決できるようになる。④労せずに得ることができる。"},
+  {no:69,midashi:"丙乙　休・開門　吉凶神",kakkyoku:"なし",kan1:"丙",kan2:"乙",mon:"休・開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①個人のことも公のこともすべて順調になる。②内外ともに利益があって金がはいる。③休門：金がはいることによって安定する。④開門：金がはいることによって発展する。"},
+  {no:70,midashi:"丙乙　生門　九天",kakkyoku:"神遁",kan1:"丙",kan2:"乙",mon:"生門",shin:"九天",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"①ラッキー・チャンスによって大きな財源を手にする。②持続的に金がつぎつぎと入ってくる。"},
+  {no:71,midashi:"丙乙　生門　蛇・陰・合・陳・雀・地",kakkyoku:"なし",kan1:"丙",kan2:"乙",mon:"生門",shin:"蛇・陰・合・陳・雀・地",monClass:"吉門",shinClass:"混合",kikyo:"吉凶混",shoui:"①個人のことも公のこともすべて順調になる。②内外ともに利益があって金がはいる。③利益がさらに利益を生みだし、どんどん成長する。"},
+  {no:72,midashi:"丙乙　五凶門　四吉神",kakkyoku:"なし",kan1:"丙",kan2:"乙",mon:"五凶門",shin:"四吉神",monClass:"凶門",shinClass:"吉神",kikyo:"吉凶混",shoui:"①個人のことも公のこともすべて順調になる。②内外ともに利益があって金がはいる。太陰ならこころの安らぎ、六合なら人びとと仲良くなる、九地なら家庭が幸福、九天なら地位の昇進。"},
+  {no:73,midashi:"丙乙　五凶門　三凶神",kakkyoku:"なし",kan1:"丙",kan2:"乙",mon:"五凶門",shin:"三凶神",monClass:"凶門",shinClass:"凶神",kikyo:"凶",shoui:"傷門+騰蛇: 強引さがトラブルと障害をおこし、けがや事故のおそれも十分ある。杜門+勾陳: 貪欲さがむしろ騙される結果になり八方ふさがり。各凶門×凶神の組み合わせにより多岐にわたる凶兆あり。"},
+  {no:74,midashi:"丙丙　休・開門　四吉神",kakkyoku:"丙奇伏吟",kan1:"丙",kan2:"丙",mon:"休・開門",shin:"四吉神",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"①休門+太陰：大いに心がやすまる。②開門+太陰：信仰によって心が開かれる。③休門+六合：くつろぎと安らぎを十分得られる。④開門+六合：交際範囲がおおいに広まり対人関係がうまくいく。⑤休門+九地：家庭生活が幸福。⑥開門+九地：こころが広々としてゆとりが出てくる。⑦休門+九天：余裕が発展をうながす。⑧開門+九天：積極性が発展をうながす。"},
+  {no:75,midashi:"丙丙　休・開門　三凶神",kakkyoku:"丙奇伏吟",kan1:"丙",kan2:"丙",mon:"休・開門",shin:"三凶神",monClass:"吉門",shinClass:"凶神",kikyo:"吉凶混",shoui:"①勇気があって策略がなく、がむしゃらに進んでことを敗り、ひどい損失をまねいてしまう。騰蛇ならトラブル、勾陳なら騙される、朱雀なら裁判ざたになる。"},
+  {no:76,midashi:"丙丙　生門　九天",kakkyoku:"神遁",kan1:"丙",kan2:"丙",mon:"生門",shin:"九天",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"①ラッキー・チャンスによって大きな財源を手にする。②持続的に金がつぎつぎと入ってくる。"},
+  {no:77,midashi:"丙丙　生門　陰・合・地",kakkyoku:"丙奇伏吟",kan1:"丙",kan2:"丙",mon:"生門",shin:"陰・合・地",monClass:"吉門",shinClass:"混合",kikyo:"吉凶混",shoui:"①太陰：こころの安らぎによって成長する。②六合：交際関係のよさによって成長する。③九地：家庭生活のよさによって成長する。"},
+  {no:78,midashi:"丙丙　生門　三凶神",kakkyoku:"丙奇伏吟",kan1:"丙",kan2:"丙",mon:"生門",shin:"三凶神",monClass:"吉門",shinClass:"凶神",kikyo:"吉凶混",shoui:"①勇気があって策略がなく、がむしゃらに進んでことを敗り、ひどい損失をまねいてしまう。騰蛇ならトラブル、勾陳なら騙される、朱雀なら裁判ざたになる。"},
+  {no:79,midashi:"丙丙　五凶門　吉凶神",kakkyoku:"丙奇伏吟",kan1:"丙",kan2:"丙",mon:"五凶門",shin:"吉凶神",monClass:"凶門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①勇気があって策略がなく、がむしゃらに進んでことを敗り、ひどい損失をまねいてしまう。傷門なら障害・けが・事故、杜門なら騙されて八方ふさがり、景門なら派手すぎて浪費がひどい、死門なら一切がとまってしまう、驚門なら危いめに逢う。"},
+  {no:80,midashi:"丙丁　休・開門　吉凶神",kakkyoku:"なし",kan1:"丙",kan2:"丁",mon:"休・開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①身分のたかい人ほどいいことがあり、金がはいる。②休門：金がはいることによって安定する。③開門：金がはいることによって発展する。"},
+  {no:81,midashi:"丙丁　生門　九天",kakkyoku:"神遁",kan1:"丙",kan2:"丁",mon:"生門",shin:"九天",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"①ラッキー・チャンスによって大きな財源を手にする。②持続的に金がつぎつぎと入ってくる。"},
+  {no:82,midashi:"丙丁　生門　蛇・陰・合・陳・雀・地",kakkyoku:"なし",kan1:"丙",kan2:"丁",mon:"生門",shin:"蛇・陰・合・陳・雀・地",monClass:"吉門",shinClass:"混合",kikyo:"吉凶混",shoui:"①身分のたかい人ほどいいことがあり、金がはいる。②金がはいることによって成長する。"},
+  {no:83,midashi:"丙丁　五凶門　四吉神",kakkyoku:"なし",kan1:"丙",kan2:"丁",mon:"五凶門",shin:"四吉神",monClass:"凶門",shinClass:"吉神",kikyo:"吉凶混",shoui:"①身分のたかい人ほどいいことがあり、金がはいる。太陰なら心にゆとり、六合なら対人関係がよくなる、九地なら家庭の幸福、九天なら地位の昇進。"},
+  {no:84,midashi:"丙丁　五凶門　三凶神",kakkyoku:"なし",kan1:"丙",kan2:"丁",mon:"五凶門",shin:"三凶神",monClass:"凶門",shinClass:"凶神",kikyo:"凶",shoui:"傷門+騰蛇: トラブルによって障害・けが・事故などがある。杜門+騰蛇: トラブルによって八方ふさがりになる。景門+騰蛇: トラブルによって知られたくない秘密がばれる。各凶門×凶神の組み合わせにより多岐にわたる凶兆あり。"},
+  {no:85,midashi:"丙戊　休・開・五凶門　吉凶神",kakkyoku:"月奇得使",kan1:"丙",kan2:"戊",mon:"休・開・五凶門",shin:"吉凶神",monClass:"吉凶門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①パワーとアイデアにめぐまれるようになる。②莫大な利益を手にする。"},
+  {no:86,midashi:"丙戊　生門　九天",kakkyoku:"天遁・神遁",kan1:"丙",kan2:"戊",mon:"生門",shin:"九天",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"①パワーとアイデアとにめぐまれ、莫大な利益を手にする。②大きな財源を手にして、持続的に金がはいる。③仕事はどんどん大きくなり、地位が上昇する。"},
+  {no:87,midashi:"丙戊　生門　蛇・陰・合・陳・雀・地",kakkyoku:"天遁",kan1:"丙",kan2:"戊",mon:"生門",shin:"蛇・陰・合・陳・雀・地",monClass:"吉門",shinClass:"混合",kikyo:"吉凶混",shoui:"①パワーとアイデアとにめぐまれ、莫大な利益を手にする。②仕事がはかどり、成長して地位が上昇する。"},
+  {no:88,midashi:"丙己　休・開門　吉凶神",kakkyoku:"なし",kan1:"丙",kan2:"己",mon:"休・開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①しっかりした財源をつかむ。②休門：その財源によって安定できるようになる。③開門：その財源によって発展できるようになる。"},
+  {no:89,midashi:"丙己　生門　九天",kakkyoku:"神遁",kan1:"丙",kan2:"己",mon:"生門",shin:"九天",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"①ラッキー・チャンスによって大きな財源を手にする。②持続的に金がつぎつぎと入ってくる。"},
+  {no:90,midashi:"丙己　生門　蛇・陰・合・陳・雀・地",kakkyoku:"なし",kan1:"丙",kan2:"己",mon:"生門",shin:"蛇・陰・合・陳・雀・地",monClass:"吉門",shinClass:"混合",kikyo:"吉凶混",shoui:"①しっかりした財源をつかむ。②その財源によって大きく成長する。"},
+  {no:91,midashi:"丙己　五凶門　四吉神",kakkyoku:"なし",kan1:"丙",kan2:"己",mon:"五凶門",shin:"四吉神",monClass:"凶門",shinClass:"吉神",kikyo:"吉凶混",shoui:"①しっかりした財源をつかむ。太陰ならその財源によって心にゆとり、六合なら人間関係がよくなる、九地なら生活が安定、九天なら地位が昇進。"},
+  {no:92,midashi:"丙己　五凶門　三凶神",kakkyoku:"なし",kan1:"丙",kan2:"己",mon:"五凶門",shin:"三凶神",monClass:"凶門",shinClass:"凶神",kikyo:"凶",shoui:"傷門+騰蛇: 財源ほしさにトラブルをおこし、事故・けが・障害・刃傷ざたにまで発展する。各凶門×凶神の組み合わせにより多岐にわたる凶兆あり。財源をもとめることで各種トラブルが発生する。"},
+  {no:93,midashi:"丙庚　休・開・五凶門　吉凶神",kakkyoku:"熒惑入白",kan1:"丙",kan2:"庚",mon:"休・開・五凶門",shin:"吉凶神",monClass:"吉凶門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①自分のガードが破られ、相手に強引に踏みこまれる。②捕えたい人に逃げられてしまう。"},
+  {no:94,midashi:"丙庚　生門　九天",kakkyoku:"神遁",kan1:"丙",kan2:"庚",mon:"生門",shin:"九天",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"①ラッキー・チャンスによって大きな財源を手にする。②持続的に金がつぎつぎと入ってくる。"},
+  {no:95,midashi:"丙庚　生門　蛇・陰・合・陳・雀・地",kakkyoku:"熒惑入白",kan1:"丙",kan2:"庚",mon:"生門",shin:"蛇・陰・合・陳・雀・地",monClass:"吉門",shinClass:"混合",kikyo:"吉凶混",shoui:"①自分のガードが破られ、相手に強引に踏みこまれる。②捕えたい人に逃げられてしまう。"},
+  {no:96,midashi:"丙辛　休・開門　吉凶神",kakkyoku:"なし",kan1:"丙",kan2:"辛",mon:"休・開門",shin:"吉凶神",monClass:"吉門",shinClass:"吉凶",kikyo:"吉凶混",shoui:"①願望がかない、すべてが順調にいく。②病気がなおる。③休門：安らぎといこいが家庭にあって幸福になる。④開門：仕事がうまく運び、よく発展する。"},
+  {no:97,midashi:"丙辛　生門　九天",kakkyoku:"神遁",kan1:"丙",kan2:"辛",mon:"生門",shin:"九天",monClass:"吉門",shinClass:"吉神",kikyo:"吉",shoui:"①ラッキー・チャンスによって大きな財源を手にする。②持続的に金がつぎつぎと入ってくる。"},
+  {no:98,midashi:"丙辛　生門　蛇・陰・合・陳・雀・地",kakkyoku:"なし",kan1:"丙",kan2:"辛",mon:"生門",shin:"蛇・陰・合・陳・雀・地",monClass:"吉門",shinClass:"混合",kikyo:"吉凶混",shoui:"①願望がかない、すべてが順調にいく。②病気がなおる。③財源を手にして成長する。"},
+  {no:99,midashi:"丙辛　五凶門　四吉神",kakkyoku:"なし",kan1:"丙",kan2:"辛",mon:"五凶門",shin:"四吉神",monClass:"凶門",shinClass:"吉神",kikyo:"吉凶混",shoui:"①願望がかない、すべてが順調にいく。②病気がなおる。太陰なら心のやすらぎ、六合なら対人関係がうまくいく、九地なら家庭の幸福、九天なら地位の昇進。"}
+];
+
+function kikyoClass(k){ return k==='吉'?'kk-kichi':k==='凶'?'kk-kyou':'kk-mixed'; }
+
+function filterDB(){
+  const q = document.getElementById('searchBox').value.trim().toLowerCase();
+  const kan = document.getElementById('filterKan').value;
+  const mon = document.getElementById('filterMon').value;
+  const kk = document.getElementById('filterKikyo').value;
+  const rows = DATA.filter(d => {
+    if(kan && d.kan1 !== kan) return false;
+    if(kk && d.kikyo !== kk) return false;
+    if(mon && !d.mon.includes(mon)) return false;
+    if(q){
+      const haystack = (d.midashi+d.kakkyoku+d.shoui+d.mon+d.shin+d.kikyo).toLowerCase();
+      if(!haystack.includes(q)) return false;
+    }
+    return true;
+  });
+  renderRows(rows);
+}
+
+function renderRows(rows){
+  const tbody = document.getElementById('dbBody');
+  const noRes = document.getElementById('noResults');
+  const stats = document.getElementById('dbStats');
+  if(rows.length === 0){
+    tbody.innerHTML = '';
+    noRes.style.display = 'block';
+    stats.textContent = '0件';
+    return;
+  }
+  noRes.style.display = 'none';
+  stats.textContent = `${rows.length} 件を表示中（全 ${DATA.length} 件中）`;
+  tbody.innerHTML = rows.map(d => `
+    <tr>
+      <td class="no">${d.no}</td>
+      <td class="midashi">${d.midashi}</td>
+      <td class="kakkyoku" style="font-size:.78rem;">${d.kakkyoku}</td>
+      <td style="white-space:nowrap;font-size:.82rem;">${d.kan1}${d.kan2 ? '×'+d.kan2 : ''}</td>
+      <td style="white-space:nowrap;font-size:.82rem;">${d.mon}</td>
+      <td style="font-size:.78rem;">${d.shin}</td>
+      <td><span class="badge-kk ${kikyoClass(d.kikyo)}">${d.kikyo}</span></td>
+      <td class="shoui"><span class="shoui-text">${d.shoui}</span></td>
+    </tr>`).join('');
+}
+
+function resetFilters(){
+  document.getElementById('searchBox').value = '';
+  document.getElementById('filterKan').value = '';
+  document.getElementById('filterMon').value = '';
+  document.getElementById('filterKikyo').value = '';
+  filterDB();
+}
+
+renderRows(DATA);
+document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
+</script>
+</body>
+</html>
