@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ | KIYOMITSU</title>
+  <meta name="description" content="KIYOMITSUへのお問い合わせページ。奇門遁甲鑑定・感情整理セッションに関するご質問・ご相談をお気軽にどうぞ。">
+  <link rel="canonical" href="https://kiyomitsu.jp/contact">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-size: .85rem; color: var(--text-2); margin-bottom: .4rem; letter-spacing: .04em; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: .65rem .9rem; border: 1px solid var(--border);
+      border-radius: 3px; font-size: .9rem; font-family: var(--font-body);
+      background: var(--surface); color: var(--text); transition: border-color .2s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--gold-light);
+    }
+    .form-group textarea { min-height: 140px; resize: vertical; line-height: 1.7; }
+    .form-submit { width: 100%; padding: .85rem; background: var(--gold); color: #fff; border: none; border-radius: 3px; font-size: .9rem; cursor: pointer; letter-spacing: .08em; font-family: var(--font-body); transition: background .2s; }
+    .form-submit:hover { background: var(--gold-light); }
+    .form-note { font-size: .78rem; color: var(--text-3); margin-top: .4rem; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="brand">Kiyomitsu</span>
+      <span class="tagline">奇門遁甲の研究と実践</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="kimon-theory.html">奇門遁甲とは</a></li>
+      <li><a href="trust.html">安全性</a></li>
+      <li><a href="service.html">サービス</a></li>
+      <li><a href="profile.html">プロフィール</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html" class="cta-link active">お問い合わせ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container" style="max-width:600px;">
+    <div class="article-header">
+      <div class="breadcrumb"><a href="index.html">ホーム</a><span>お問い合わせ</span></div>
+      <h1>お問い合わせ</h1>
+      <p class="lead">ご質問・ご相談は下記フォームよりお送りください。通常2〜3営業日以内にご返信します。</p>
+    </div>
+
+    <div class="article-body">
+      <div style="background:var(--gold-pale);border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem;font-size:.85rem;color:var(--text-2);margin-bottom:2rem;">
+        鑑定のご予約は <a href="https://coconala.com/users/109941" target="_blank" rel="noopener" style="color:var(--gold);">coconala</a> より承っています。こちらのフォームは「どちらのサービスが向いているか相談したい」「詳しく話を聞いてみたい」という方向けです。
+      </div>
+
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-group">
+          <label for="name">お名前 <span style="color:var(--gold);">*</span></label>
+          <input type="text" id="name" name="name" required placeholder="山田 花子">
+        </div>
+        <div class="form-group">
+          <label for="email">メールアドレス <span style="color:var(--gold);">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="example@email.com">
+          <p class="form-note">返信用のアドレスをご入力ください</p>
+        </div>
+        <div class="form-group">
+          <label for="subject">ご相談の種類</label>
+          <select id="subject" name="subject">
+            <option value="">選択してください</option>
+            <option value="kimon">奇門遁甲・象意鑑定について</option>
+            <option value="session">感情整理セッションについて</option>
+            <option value="both">どちらが向いているか相談したい</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">ご相談内容 <span style="color:var(--gold);">*</span></label>
+          <textarea id="message" name="message" required placeholder="現在の状況や、気になっていること、知りたいことなどをご自由にお書きください。"></textarea>
+        </div>
+        <p style="font-size:.78rem;color:var(--text-3);margin-bottom:1rem;">送信内容は<a href="privacy.html" style="color:var(--text-3);">プライバシーポリシー</a>に従い管理します。無理な勧誘は一切行いません。</p>
+        <button type="submit" class="form-submit">送信する</button>
+      </form>
+
+      <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);">
+        <p style="font-size:.85rem;color:var(--text-2);margin-bottom:.75rem;">すぐにご予約・ご依頼の方はこちら：</p>
+        <div class="btn-group" style="justify-content:flex-start;">
+          <a href="https://coconala.com/services/3803253" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:.82rem;">奇門遁甲鑑定を予約 →</a>
+          <a href="https://coconala.com/services/3812404" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size:.82rem;">感情整理セッションを予約 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><span class="brand">Kiyomitsu</span><p>奇門遁甲の研究と実践。</p></div>
+      <div class="footer-links">
+        <div class="footer-links-group"><h4>Learn</h4><ul><li><a href="kimon-theory.html">奇門遁甲とは</a></li><li><a href="trust.html">安全性</a></li></ul></div>
+        <div class="footer-links-group"><h4>Service</h4><ul><li><a href="service.html">サービス</a></li><li><a href="profile.html">プロフィール</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+        <div class="footer-links-group"><h4>Legal</h4><ul><li><a href="privacy.html">プライバシーポリシー</a></li><li><a href="legal.html">特定商取引法</a></li></ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Kiyomitsu Studio</span><div class="footer-social"><a href="https://note.com/kiyomitsu369" target="_blank" rel="noopener">note</a><a href="https://x.com/kiyomitsu369" target="_blank" rel="noopener">X</a><a href="https://coconala.com/users/109941" target="_blank" rel="noopener">coconala</a></div></div>
+  </div>
+</footer>
+<script>document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));</script>
+</body>
+</html>
